@@ -2145,6 +2145,124 @@ body {
   transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Image Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.close:hover {
+  color: var(--primary-orange);
+}
+
+#modalCaption {
+  color: white;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Enhanced Video Controls */
+.video-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.video-item:hover video {
+  transform: scale(1.02);
+}
+
+.video-controls-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.video-item:hover .video-controls-overlay {
+  opacity: 1;
+}
+
+.video-play-btn {
+  background: var(--primary-orange);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+}
+
+.video-play-btn:hover {
+  background: var(--deep-orange);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 102, 0, 0.6);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .location-content {
@@ -2160,6 +2278,16 @@ body {
   .media-item img,
   .video-item video {
     height: 150px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: 10px;
+  }
+  
+  .close {
+    font-size: 28px;
+    right: 15px;
   }
 }
 

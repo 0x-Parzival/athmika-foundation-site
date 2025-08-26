@@ -383,6 +383,81 @@ function initGallerySlider() {
     console.log('✨ Gallery slider initialized');
 }
 
+// Image Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    initImageModal();
+});
+
+function initImageModal() {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.close');
+    
+    // Add click event to all images in location update section
+    const locationImages = document.querySelectorAll('.location-update .image-item img');
+    
+    locationImages.forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = 'block';
+            modalImg.src = this.src;
+            modalCaption.textContent = this.alt;
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    });
+    
+    // Close modal when clicking the X
+    closeBtn.addEventListener('click', function() {
+        closeModal();
+    });
+    
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+    
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+}
+
+// Video Player Functionality
+function playVideo(button) {
+    const videoItem = button.closest('.video-item');
+    const video = videoItem.querySelector('video');
+    const overlay = videoItem.querySelector('.video-controls-overlay');
+    
+    if (video.paused) {
+        video.play();
+        video.setAttribute('controls', 'controls');
+        overlay.style.display = 'none';
+        
+        // Show controls overlay again when video ends
+        video.addEventListener('ended', function() {
+            overlay.style.display = 'flex';
+            video.removeAttribute('controls');
+        });
+        
+        // Show controls overlay when video is paused
+        video.addEventListener('pause', function() {
+            if (!video.ended) {
+                overlay.style.display = 'flex';
+                video.removeAttribute('controls');
+            }
+        });
+    }
+}
+
 // Mouse movement parallax effect for hero image
 document.addEventListener('mousemove', function(e) {
     const mouseX = e.clientX / window.innerWidth;
